@@ -159,10 +159,6 @@ class CpuPlatform(Platform):
         pass
 
     @classmethod
-    def inference_mode(cls):
-        return torch.no_grad()
-
-    @classmethod
     def check_and_update_config(cls, vllm_config: VllmConfig) -> None:
         model_config = vllm_config.model_config
 

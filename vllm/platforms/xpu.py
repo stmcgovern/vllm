@@ -156,10 +156,6 @@ class XPUPlatform(Platform):
         return device_props.total_memory
 
     @classmethod
-    def inference_mode(cls):
-        return torch.no_grad()
-
-    @classmethod
     def get_static_graph_wrapper_cls(cls) -> str:
         return "vllm.compilation.cuda_graph.CUDAGraphWrapper"
 
