@@ -328,7 +328,7 @@ class Worker(WorkerBase):
     def reload_weights(self, *args, **kwargs) -> None:
         self.model_runner.reload_weights(*args, **kwargs)
 
-    @torch.inference_mode()
+    @current_platform.inference_mode()
     def determine_available_memory(self) -> int:
         """Profiles the peak memory usage of the model to determine how much
         memory can be used for KV cache without OOMs.
@@ -738,13 +738,13 @@ class Worker(WorkerBase):
         )
         return self.profiler.annotate_context_manager(annotation)
 
-    @torch.inference_mode()
+    @current_platform.inference_mode()
     def sample_tokens(
         self, grammar_output: "GrammarOutput | None"
     ) -> ModelRunnerOutput | AsyncModelRunnerOutput:
         return self.model_runner.sample_tokens(grammar_output)
 
-    @torch.inference_mode()
+    @current_platform.inference_mode()
     def execute_model(
         self, scheduler_output: "SchedulerOutput"
     ) -> ModelRunnerOutput | AsyncModelRunnerOutput | None:
